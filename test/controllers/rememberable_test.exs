@@ -46,7 +46,7 @@ defmodule CoherenceTest.Rememberable do
       conn = get(conn, dummy_path(conn, :new))
       assert html_response(conn, 200) =~ "Login callback rendered"
       assert conn.halted
-      assert conn.private[:plug_session]["user_return_to"] == "/dummies/new"
+      assert conn.private[:plug_session]["user_return_to"] == "http://localhost:4001/dummies/new"
     end
   end
 

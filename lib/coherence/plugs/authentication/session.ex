@@ -231,11 +231,7 @@ defmodule Coherence.Authentication.Session do
   end
 
   defp assert_login({conn, nil}, login, _opts) when login == true or is_function(login) do
-    user_return_to =
-      case conn.query_string do
-        "" -> conn.request_path
-        _ -> conn.request_path <> "?" <> conn.query_string
-      end
+    user_return_to = if conn.private[:phoenix_endpoint], do: Phoenix.Controller.current_url(conn)
 
     conn = put_session(conn, "user_return_to", user_return_to)
 
